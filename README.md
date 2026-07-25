@@ -11,29 +11,41 @@
 
 ## Project Overview
 
-MedVault ZK is a confidential healthcare credentials platform designed to issue, store, and verify medical vaccination certificates with absolute data privacy. Powered by Midnight Protocol's Zero-Knowledge technology and the Compact programming language, MedVault ZK enables patients to prove medical compliance—such as meeting dose requirements and unexpired validity—without exposing legal names, medical histories, or vaccine manufacturers to verifiers or public blockchains.
+MedVault ZK is a confidential healthcare credentials platform designed to issue, store, and verify medical vaccination certificates with absolute data privacy. Powered by Midnight Protocol's Zero-Knowledge technology and the Compact programming language, MedVault ZK enables patients to prove medical compliance—such as meeting minimum dose requirements and unexpired validity—without exposing legal names, medical histories, or vaccine manufacturers to verifiers or public blockchains.
 
 ---
 
-## Landing Page
+## Application Preview
 
-![MedVault ZK Landing Page](docs/images/landing_page.png)
+<p align="center">
+  <img src="docs/images/landing_page.png" alt="Landing Page" width="100%" />
+</p>
 
-> The main dashboard of MedVault ZK provides a unified interface for issuing and verifying confidential vaccination certificates, monitoring network status, connecting a Lace wallet, and interacting with Midnight Protocol through a clean healthcare-focused experience.
+### Landing Page
+
+The landing dashboard introduces the MedVault ZK Private Vaccination Certificate platform, providing healthcare administrators and users with a secure environment for issuing, managing, and verifying confidential vaccination credentials powered by Midnight Protocol.
+
+<br />
+
+<p align="center">
+  <img src="docs/images/certification_page.png" alt="Certification Page" width="100%" />
+</p>
+
+### Certification Page
+
+The certificate issuance interface enables authorised healthcare providers to securely create confidential vaccination certificates while protecting sensitive patient information through Zero-Knowledge technology and Midnight Protocol confidential execution.
 
 ---
 
-## Certification Page
+# 🌐 Live Application
 
-![MedVault ZK Certification Page](docs/images/certification_page.png)
+The application is deployed and publicly accessible. Explore the live MedVault ZK platform to experience confidential vaccination certificate issuance and verification powered by Midnight Protocol.
 
-> The certificate issuance interface enables authorised healthcare providers to create confidential vaccination credentials while keeping sensitive patient information private through Midnight Protocol's confidential execution model.
+🚀 **Live Web Application:** [https://private-vaccination-certificate.vercel.app/](https://private-vaccination-certificate.vercel.app/)
 
----
+### 🎥 Video Demonstration
 
-## 🎥 Live Demo
-
-Watch the complete demonstration of the MedVault ZK Private Vaccination Certificate platform, showcasing certificate issuance, confidential verification, wallet integration, and Midnight Protocol Zero-Knowledge workflows.
+Watch the complete demonstration of the MedVault ZK Private Vaccination Certificate platform, showcasing certificate issuance, confidential verification, wallet integration, and Midnight Protocol Zero-Knowledge workflows:
 
 ▶ **[Watch the complete project demonstration on YouTube](https://youtu.be/PM3jLemgOpg)**
 
@@ -55,7 +67,7 @@ Legacy paper health passes, digital QR codes, and public blockchain registries e
 MedVault ZK addresses these challenges using Midnight's confidential execution model:
 
 - **Private Witness State**: Sensitive data (patient secrets, dose counts, vaccine types, expiration dates) remains strictly within local client storage.
-- **On-Device Assertion Rules**: Compact smart contract circuits evaluate eligibility conditions locally (e.g. verifying that received doses meet minimum criteria and that the certificate is unexpired).
+- **On-Device Assertion Rules**: Compact smart contract circuits evaluate eligibility conditions locally (e.g., verifying that received doses meet minimum criteria and that the certificate is unexpired).
 - **Cryptographic Nullifiers**: Midnight's `disclose()` operator generates a single-use nullifier hash. This hash proves that a valid certificate exists without revealing patient identity or underlying medical details.
 
 ---
@@ -63,12 +75,13 @@ MedVault ZK addresses these challenges using Midnight's confidential execution m
 ## Key Features
 
 - **Confidential Vaccination Certificate Issuance**: Enable healthcare providers to issue tamper-evident credentials directly into patient witness storage.
-- **Privacy-Preserving Zero-Knowledge Verification**: Execute local proof circuits that assert dose and expiration criteria without leaking medical data.
-- **Compact Smart Contract Integration**: Enforce business rules and nullifier tracking using compiled Compact ZK circuits.
+- **Zero-Knowledge Verification**: Execute local proof circuits that assert dose and expiration criteria without leaking medical data.
 - **Midnight Protocol Confidential Execution**: Leverage Midnight's dual-state engine to decouple public ledger state from private witness attributes.
+- **Compact Smart Contracts**: Enforce business rules and nullifier tracking using compiled Compact ZK circuits.
+- **Lace Wallet Integration**: Connect seamlessly with the Lace Wallet browser extension for signing ZK transactions on-chain.
 - **Secure Healthcare Credential Management**: Store and manage witness records locally with instant copy and verification controls.
-- **Responsive Healthcare Dashboard**: Monitor platform metrics, system health, and verification logs across desktop, tablet, and mobile devices.
-- **Wallet Connectivity**: Integrate with the Lace Wallet extension for signing zero-knowledge proof transactions on-chain.
+- **Privacy-Preserving Verification**: Disclose only boolean verification results and single-use cryptographic nullifier hashes.
+- **Responsive React Frontend**: Monitor platform metrics, system health, and verification logs across desktop, tablet, and mobile devices.
 
 ---
 
@@ -81,7 +94,7 @@ MedVault ZK addresses these challenges using Midnight's confidential execution m
 
 ---
 
-## Architecture Overview
+## Architecture
 
 ```
 +-------------------------------------------------------------------+
@@ -97,7 +110,7 @@ MedVault ZK addresses these challenges using Midnight's confidential execution m
 +-------------------------------------------------------------------+
 |                     COMPACT ZK CIRCUIT PROVER                     |
 |                                                                   |
-|  Executes Circuit Assertions Locally:                              |
+|  Executes Circuit Assertions Locally:                             |
 |  - Verify dose count >= required minimum                          |
 |  - Verify certificate is unexpired                                |
 |  - Verify valid vaccine identifier                                |
@@ -150,16 +163,6 @@ The web application consists of focused components:
 
 ---
 
-## Wallet Integration
-
-MedVault ZK integrates with the **Lace Wallet** browser extension for Midnight Protocol, with support for standard Web3 providers:
-
-- Detects active wallet extension instances on startup.
-- Displays wallet connection status, truncated address strings, and balance metrics.
-- Provides fallback connectivity for local testing and development.
-
----
-
 ## Repository Structure
 
 ```
@@ -205,7 +208,7 @@ private-vaccination-certificate/
 
 ---
 
-## Local Development
+## Installation
 
 ### Prerequisites
 - **Node.js**: v22.0.0 or higher
@@ -213,19 +216,22 @@ private-vaccination-certificate/
 - **Compact Compiler**: v0.31.1
 - **Docker & Docker Compose** (for local proof server and indexer)
 
-### Installation
 ```bash
 git clone https://github.com/shouvikkk/private-vaccination-certificate.git
 cd private-vaccination-certificate
 npm install
 ```
 
+---
+
+## Running Locally
+
 ### Compiling Smart Contracts
 ```bash
 npm run compile
 ```
 
-### Running Locally
+### Starting Local Environment & Server
 ```bash
 # Start local proof server and indexer containers
 docker compose up -d
@@ -238,12 +244,16 @@ npm run dev
 ```
 Open `http://localhost:3000` in your web browser.
 
-### Building
+### Building for Production
 ```bash
 npm run build
 ```
 
-### Testing
+---
+
+## Testing
+
+Execute unit and integration test suites:
 ```bash
 npm test
 ```
@@ -264,22 +274,6 @@ Continuous integration is configured via `.github/workflows/ci.yml`. On every pu
 
 ---
 
-## Project Status
-
-| Module | Status | Description |
-| :--- | :--- | :--- |
-| **Smart Contract** | ✅ Complete | Compact contract implemented successfully |
-| **Frontend** | ✅ Complete | Responsive React application |
-| **Wallet Integration** | ✅ Complete | Lace Wallet integration available |
-| **Local Deployment** | ✅ Complete | Successfully deployed on Midnight Local Devnet |
-| **Testing** | ✅ Complete | Unit and end-to-end tests completed |
-| **CI/CD** | ✅ Complete | GitHub Actions workflow configured |
-| **Documentation** | ✅ Complete | README, screenshots and demo included |
-
-The application has been successfully validated in the local Midnight development environment. The smart contract compiles cleanly, the frontend operates correctly, automated tests pass, and continuous integration verifies the repository on every push.
-
----
-
 ## Security & Privacy
 
 MedVault ZK is built with privacy-first architecture principles:
@@ -295,7 +289,6 @@ MedVault ZK is built with privacy-first architecture principles:
 
 - **QR Code Verification**: Generate and scan offline QR codes containing zero-knowledge proof payloads.
 - **Certificate Revocation**: Implement on-chain cryptographic accumulators to support credential revocation.
-- **Multi-Authority Healthcare Providers**: Enable signature verification across multiple recognized health organizations.
 - **Mobile Wallet Compatibility**: Support native mobile wallet extensions and biometric witness storage.
 - **National Healthcare Integration**: Connect with international healthcare registry APIs and standards.
 - **Multi-Language Support**: Localize the user interface for global healthcare deployments.
