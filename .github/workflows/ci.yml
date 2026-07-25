@@ -25,6 +25,7 @@ jobs:
           mkdir -p $HOME/.local/bin
           curl -sSL https://raw.githubusercontent.com/midnight-ntwrk/compact/main/install.sh | bash || true
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "$HOME/.compact/versions/0.31.1/x86_64-unknown-linux-musl" >> $GITHUB_PATH
 
       - name: Install Dependencies
         run: npm ci || npm install

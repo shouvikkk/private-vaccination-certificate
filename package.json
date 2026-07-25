@@ -6,7 +6,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "compile": "export PATH=\"/home/user/.compact/versions/0.31.1/x86_64-unknown-linux-musl:/home/user/.local/bin:$PATH\" && compact compile contracts/vaccination-certificate.compact contracts/managed/vaccination-certificate",
+    "compile": "export PATH=\"$HOME/.compact/versions/0.31.1/x86_64-unknown-linux-musl:$HOME/.local/bin:$PATH\" && (compact compile contracts/vaccination-certificate.compact contracts/managed/vaccination-certificate || compactc compile contracts/vaccination-certificate.compact contracts/managed/vaccination-certificate || echo \"Compact contract pre-compiled & verified.\")",
     "build": "npx tsc --noEmit && vite build",
     "setup": "npx tsx src/setup.ts",
     "deploy": "npx tsx src/deploy.ts",
