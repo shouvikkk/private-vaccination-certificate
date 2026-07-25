@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../../",
+  "sources": ["contracts/vaccination-certificate.compact", "compiler/standard-library.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAAA;;;;;;;;;;MAQA,AAAA,YAEC;;;;;cAF2B,eAAwB;;;;;;;;;;;;;;;;;;yCAAxB,eAAwB;;;;;;;;;8CAAxB,eAAwB;;;OAEnD;MAED,AAAA,iBAgBC;;;;;cAfG,wBAAiC;cACjC,oBAA4B;cAC5B,sBAA8B;cAC9B,8BAAsC;cACtC,oBAA4B;cAC5B,mBAA2B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;yCAL3B,wBAAiC,+BACjC,oBAA4B,+BAC5B,sBAA8B,+BAC9B,8BAAsC,+BACtC,oBAA4B,+BAC5B,mBAA2B;;;;;;;;;mDAL3B,wBAAiC;mDACjC,oBAA4B;mDAC5B,sBAA8B;mDAC9B,8BAAsC;mDACtC,oBAA4B;mDAC5B,mBAA2B;;;OAU9B;;;;;;;;;;GACA;EA7BD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAIA;;;;;;;;;yEAAmC;IACnC;;;;;;;;;yEAA4C;IAC5C;;;;;;;;;yEAAwC;;;;;;;GAuBvC;EC7BD,AAAA,kBAAA;oEAAA;;;EDQA,AAAA,eAEC,4BAF2B,eAAwB;IAChD;;;;;;;2HAAqB,eAAa;;yEAAzB;;GACZ;EAED,AAAA,oBAgBC;;uBAfG,wBAAiC;uBACjC,oBAA4B;uBAC5B,sBAA8B;uBAC9B,8BAAsC;uBACtC,oBAA4B;uBAC5B,mBAA2B;;4BAEpB,oBAAkB,IAAI,oBAAkB;;4BACxC,8BAA4B;;4BAAI,mBAAiB;;4BACjD,sBAAoB;UAE3B,KAAmB;;;;;6CAAI;;;;;;;;;;;kHAAmB;;;IAA1C;;;;;;;2HAAA,KAAmB;;yEAAA;UACnB,KAAc,2BAAkD,wBAAsB;;IAAtF;;;;;;;2HAAA,KAAc;;yEAAA;mCAEP;;;;;;;;;;;wGAAc;GACxB;;;;;;;;;;;;;;;;IAxBD;qCAAA;;;;;;;;;;;0GAAmC;KAAA;IACnC;qCAAA;;;;;;;;;;;0GAA4C;KAAA;IAC5C;qCAAA;;;;;;;;;;;0GAAwC;KAAA;;;;;;;;;;"
+}
