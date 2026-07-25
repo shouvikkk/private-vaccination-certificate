@@ -1,0 +1,63 @@
+{
+  "name": "private-vaccination-certificate",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Private Vaccination Certificate dApp built on Midnight Network (Confidential Credentials)",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "compile": "export PATH=\"/home/user/.compact/versions/0.31.1/x86_64-unknown-linux-musl:/home/user/.local/bin:$PATH\" && compact compile contracts/vaccination-certificate.compact contracts/managed/vaccination-certificate",
+    "build": "npx tsc --noEmit && vite build",
+    "setup": "npx tsx src/setup.ts",
+    "deploy": "npx tsx src/deploy.ts",
+    "cli": "npx tsx src/cli.ts",
+    "check-balance": "npx tsx src/check-balance.ts",
+    "network": "npx tsx src/network.ts",
+    "proof-server:start": "docker compose up -d",
+    "proof-server:stop": "docker compose down",
+    "clean": "rm -rf contracts/managed .midnight-state.json .midnight-wallet-state",
+    "test": "npx vitest run",
+    "test:e2e": "tsx scripts/e2e-check.ts",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
+    "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
+    "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-indexer-public-data-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-level-private-state-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-network-id": "4.1.1",
+    "@midnight-ntwrk/midnight-js-node-zk-config-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-protocol": "4.1.1",
+    "@midnight-ntwrk/midnight-js-types": "4.1.1",
+    "@midnight-ntwrk/midnight-js-utils": "4.1.1",
+    "@midnight-ntwrk/wallet-sdk": "1.2.0",
+    "lucide-react": "^0.475.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rxjs": "^7.8.2",
+    "ws": "^8.21.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "tsx": "^4.23.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.4.3",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "midnight",
+    "blockchain",
+    "zero-knowledge",
+    "privacy",
+    "vaccination-certificate",
+    "confidential-credentials"
+  ]
+}
