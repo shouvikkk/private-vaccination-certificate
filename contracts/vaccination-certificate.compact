@@ -1,0 +1,29 @@
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+export ledger authority: Bytes<32>;
+export ledger total_verifications: Uint<64>;
+export ledger last_nullifier: Bytes<32>;
+
+export circuit setAuthority(new_authority: Bytes<32>): [] {
+    authority = disclose(new_authority);
+}
+
+export circuit verifyCertificate(
+    private_patient_secret: Bytes<32>,
+    private_dose_count: Uint<64>,
+    private_vaccine_type: Uint<64>,
+    private_expiration_timestamp: Uint<64>,
+    min_doses_required: Uint<64>,
+    current_timestamp: Uint<64>
+): Bytes<32> {
+    assert(private_dose_count >= min_doses_required, "Insufficient doses for eligibility");
+    assert(private_expiration_timestamp >= current_timestamp, "Certificate has expired");
+    assert(private_vaccine_type > 0, "Invalid vaccine code");
+
+    total_verifications = (total_verifications + 1) as Uint<64>;
+    last_nullifier = disclose(persistentHash<Vector<2, Bytes<32>>>([private_patient_secret, pad(32, "VAC_CERT_V1")]));
+
+    return last_nullifier;
+}
