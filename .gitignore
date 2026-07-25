@@ -12,9 +12,11 @@ build/
 .env.local
 .env.development.local
 
-# Local DB / Runtime caches
+# Local DB & Runtime network state
 midnight-level-db/
 .midnight-wallet-state/
+.midnight-state.json
+*.seed
 
 # OS generated files
 .DS_Store

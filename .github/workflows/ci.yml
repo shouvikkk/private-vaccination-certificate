@@ -30,7 +30,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Compile Compact Smart Contract
-        run: npm run compile || echo "Contract pre-compiled in contracts/managed"
+        run: npm run compile
 
       - name: Run Unit Tests
         run: npm test
