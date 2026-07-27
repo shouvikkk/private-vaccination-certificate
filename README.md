@@ -6,6 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Private Vaccination Certificate DApp** built on the **Midnight Network** utilizing **Compact** Zero-Knowledge Smart Contracts and **Confidential Credentials**.
+>
+> 📄 **Technical Proposal & Architecture Specification**: See [PROPOSAL.md](PROPOSAL.md) for full details.
 
 ---
 
@@ -59,9 +61,9 @@ The Compact circuit evaluates three zero-knowledge assertions locally:
 
 MedVault ZK integrates with the official **Midnight Lace Browser Extension** (`window.midnight.mnLace`):
 
-- **Automatic Detection**: Detects installed Midnight Lace browser extension.
+- **Automatic Detection**: Detects installed Midnight Lace browser extension across standard window provider objects (`window.midnight.mnLace`, `window.midnight.lace`, `window.cardano.lace`).
 - **Authentic Permission Flow**: Clicking **Connect Lace Wallet** invokes the native Lace authorization popup.
-- **State & Account Display**: Displays connected wallet address and balance in the header navigation.
+- **State & Account Display**: Displays connected wallet address and balance in the header navigation bar.
 - **Session Persistence**: Persists wallet connection state across page reloads via local session storage.
 - **Graceful Error Handling**: Provides user notifications if the Lace extension is missing or if connection is rejected.
 
@@ -141,7 +143,7 @@ private-vaccination-certificate/
 ├── docker-compose.yml               # Local proof server & indexer services
 ├── package.json                     # Project dependencies and scripts
 ├── PROPOSAL.md                      # Architecture proposal document
-├── README.md                        # Documentation
+├── README.md                        # Project documentation
 └── vite.config.ts                   # Vite bundler configuration
 ```
 
