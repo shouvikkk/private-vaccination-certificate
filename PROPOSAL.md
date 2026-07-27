@@ -6,6 +6,11 @@
 
 By storing private witness data strictly within client-side memory and publishing only non-malleable, single-use cryptographic nullifier hashes to the Midnight public ledger, MedVault ZK establishes a paradigm shift in healthcare data sovereignty.
 
+### 🔗 Project Resources & Deployment
+- **🌐 Live DApp Deployment**: [https://private-vaccination-certificate.vercel.app/](https://private-vaccination-certificate.vercel.app/)
+- **🎥 Video Demonstration**: [https://youtu.be/PM3jLemgOpg](https://youtu.be/PM3jLemgOpg?si=e2OqL3m6T-1-0xjn)
+- **💻 GitHub Repository**: [https://github.com/shouvikkk/private-vaccination-certificate](https://github.com/shouvikkk/private-vaccination-certificate)
+
 ---
 
 ## 🚨 Problem Statement
@@ -127,7 +132,7 @@ private-vaccination-certificate/
 ├── .github/workflows/ci.yml         # Automated CI/CD build & test workflow
 ├── contracts/
 │   ├── vaccination-certificate.compact # Compact ZK smart contract
-│   └── managed/                     # Compiled ZK circuit artifacts & keys
+│   └── managed/                     # Generated ZK circuits & proving keys
 ├── docs/images/                     # Platform UI screenshots & diagrams
 ├── scripts/e2e-check.ts              # End-to-end integration verification
 ├── src/

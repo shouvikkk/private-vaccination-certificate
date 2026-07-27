@@ -3,11 +3,25 @@
 [![CI/CD Pipeline](https://github.com/shouvikkk/private-vaccination-certificate/actions/workflows/ci.yml/badge.svg)](https://github.com/shouvikkk/private-vaccination-certificate/actions/workflows/ci.yml)
 [![Midnight Network](https://img.shields.io/badge/Midnight-Preprod-8A2BE2.svg)](https://midnight.network)
 [![Compact Compiler](https://img.shields.io/badge/Compact-v0.31.1-blue.svg)](https://midnight.network)
+[![Live Demo](https://img.shields.io/badge/Vercel-Live--Demo-000000.svg?logo=vercel)](https://private-vaccination-certificate.vercel.app/)
+[![Video Walkthrough](https://img.shields.io/badge/YouTube-Video--Demo-FF0000.svg?logo=youtube)](https://youtu.be/PM3jLemgOpg?si=e2OqL3m6T-1-0xjn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Private Vaccination Certificate DApp** built on the **Midnight Network** utilizing **Compact** Zero-Knowledge Smart Contracts and **Confidential Credentials**.
 >
+> 🌐 **Live Deployment**: [https://private-vaccination-certificate.vercel.app/](https://private-vaccination-certificate.vercel.app/)
+>
+> 🎥 **Video Walkthrough & Demonstration**: [https://youtu.be/PM3jLemgOpg](https://youtu.be/PM3jLemgOpg?si=e2OqL3m6T-1-0xjn)
+>
 > 📄 **Technical Proposal & Architecture Specification**: See [PROPOSAL.md](PROPOSAL.md) for full details.
+
+---
+
+## 🔗 Quick Links
+
+- **Live Application**: [private-vaccination-certificate.vercel.app](https://private-vaccination-certificate.vercel.app/)
+- **Video Walkthrough**: [YouTube Video Demo](https://youtu.be/PM3jLemgOpg?si=e2OqL3m6T-1-0xjn)
+- **Technical Proposal**: [PROPOSAL.md](PROPOSAL.md)
 
 ---
 
