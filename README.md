@@ -1,111 +1,84 @@
-# MedVault ZK
-
-> Private Vaccination Certificate Platform built on Midnight Protocol
+# MedVault ZK: Private Vaccination Certificate Platform
 
 [![CI/CD Pipeline](https://github.com/shouvikkk/private-vaccination-certificate/actions/workflows/ci.yml/badge.svg)](https://github.com/shouvikkk/private-vaccination-certificate/actions/workflows/ci.yml)
-![Midnight Version](https://img.shields.io/badge/Midnight%20Compact-v0.31.1-blue)
-![Node Version](https://img.shields.io/badge/Node.js-%3E%3D22.0.0-green)
-![License](https://img.shields.io/badge/License-MIT-emerald)
+[![Midnight Network](https://img.shields.io/badge/Midnight-Preprod-8A2BE2.svg)](https://midnight.network)
+[![Compact Compiler](https://img.shields.io/badge/Compact-v0.31.1-blue.svg)](https://midnight.network)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> **Private Vaccination Certificate DApp** built on the **Midnight Network** utilizing **Compact** Zero-Knowledge Smart Contracts and **Confidential Credentials**.
 
 ---
 
-## Project Overview
+## 📸 Platform Screenshots
 
-MedVault ZK is a confidential healthcare credentials platform designed to issue, store, and verify medical vaccination certificates with absolute data privacy. Powered by Midnight Protocol's Zero-Knowledge technology and the Compact programming language, MedVault ZK enables patients to prove medical compliance—such as meeting minimum dose requirements and unexpired validity—without exposing legal names, medical histories, or vaccine manufacturers to verifiers or public blockchains.
+### Dashboard & Network Overview
+![MedVault ZK Landing Overview](docs/images/landing_page.png)
 
----
-
-## Application Preview
-
-<p align="center">
-  <img src="docs/images/landing_page.png" alt="Landing Page" width="100%" />
-</p>
-
-### Landing Page
-
-The landing dashboard introduces the MedVault ZK Private Vaccination Certificate platform, providing healthcare administrators and users with a secure environment for issuing, managing, and verifying confidential vaccination credentials powered by Midnight Protocol.
-
-<br />
-
-<p align="center">
-  <img src="docs/images/certification_page.png" alt="Certification Page" width="100%" />
-</p>
-
-### Certification Page
-
-The certificate issuance interface enables authorised healthcare providers to securely create confidential vaccination certificates while protecting sensitive patient information through Zero-Knowledge technology and Midnight Protocol confidential execution.
+### ZK Proof Verification & Certificate Issuance
+![MedVault ZK Certificate Issuance](docs/images/certification_page.png)
 
 ---
 
-# 🌐 Live Application
+## 🔗 Contract Deployment Details
 
-The application is deployed and publicly accessible. Explore the live MedVault ZK platform to experience confidential vaccination certificate issuance and verification powered by Midnight Protocol.
-
-🚀 **Live Web Application:** [https://private-vaccination-certificate.vercel.app/](https://private-vaccination-certificate.vercel.app/)
-
-### 🎥 Video Demonstration
-
-Watch the complete demonstration of the MedVault ZK Private Vaccination Certificate platform, showcasing certificate issuance, confidential verification, wallet integration, and Midnight Protocol Zero-Knowledge workflows:
-
-▶ **[Watch the complete project demonstration on YouTube](https://youtu.be/PM3jLemgOpg)**
+- **Contract Address**: `8116c5128f18c8d05d1101fabfb07b406991d2fc6a1dad00d667728818639e31`
+- **Midnight Network**: `Midnight Preprod / Standalone Testnet`
+- **Deployment Status**: `Deployed & Verified`
+- **Block Explorer Link**: [Midnight Preprod Explorer](https://explorer.preprod.midnight.network/contract/8116c5128f18c8d05d1101fabfb07b406991d2fc6a1dad00d667728818639e31)
+- **Deployment Method**: Compiled with `compact` v0.31.1 and deployed via Midnight SDK contract initialization (`npm run setup` / `npm run deploy`).
 
 ---
 
-## Problem Statement
+## 🧠 Witness Inputs
 
-Legacy paper health passes, digital QR codes, and public blockchain registries expose sensitive patient information during verification:
+MedVault ZK operates on a zero-knowledge witness model implemented in `contracts/vaccination-certificate.compact`:
 
-- **Identity Exposure**: Standard QR codes broadcast full names, birth dates, and personal identification numbers to any scanner.
-- **Unnecessary Medical Disclosure**: Verifiers gain access to exact dose counts, medical histories, clinic locations, and vaccine batch details—violating basic data minimization principles.
-- **Tracking & Profiling**: Static credentials allow third parties to build location and visit histories across different venues.
-- **Fraud & Forgery**: Paper passes are easily falsified, while public records lack privacy-preserving verification mechanisms.
+### 🔒 Private Witness Data (Off-Chain Client Memory)
+- `private_patient_secret: Bytes<32>`: Secret salt identifying the patient credential holder.
+- `private_dose_count: Uint<64>`: Total number of vaccination doses received.
+- `private_vaccine_type: Uint<64>`: Numeric vaccine code (e.g., `101` for COVID-19 mRNA, `201` for Yellow Fever).
+- `private_expiration_timestamp: Uint<64>`: Certificate expiration timestamp.
 
----
+### 🌐 Public Inputs & Parameters (Verifier Provided)
+- `min_doses_required: Uint<64>`: Minimum doses required by the verifier policy.
+- `current_timestamp: Uint<64>`: Current verification timestamp.
 
-## Solution Overview
+### ⚡ Proof Generation & Circuit Assertions
+The Compact circuit evaluates three zero-knowledge assertions locally:
+1. `private_dose_count >= min_doses_required`: Verifies dose requirement compliance.
+2. `private_expiration_timestamp >= current_timestamp`: Verifies certificate freshness.
+3. `private_vaccine_type > 0`: Verifies valid vaccine registration.
 
-MedVault ZK addresses these challenges using Midnight's confidential execution model:
-
-- **Private Witness State**: Sensitive data (patient secrets, dose counts, vaccine types, expiration dates) remains strictly within local client storage.
-- **On-Device Assertion Rules**: Compact smart contract circuits evaluate eligibility conditions locally (e.g., verifying that received doses meet minimum criteria and that the certificate is unexpired).
-- **Cryptographic Nullifiers**: Midnight's `disclose()` operator generates a single-use nullifier hash. This hash proves that a valid certificate exists without revealing patient identity or underlying medical details.
-
----
-
-## Key Features
-
-- **Confidential Vaccination Certificate Issuance**: Enable healthcare providers to issue tamper-evident credentials directly into patient witness storage.
-- **Zero-Knowledge Verification**: Execute local proof circuits that assert dose and expiration criteria without leaking medical data.
-- **Midnight Protocol Confidential Execution**: Leverage Midnight's dual-state engine to decouple public ledger state from private witness attributes.
-- **Compact Smart Contracts**: Enforce business rules and nullifier tracking using compiled Compact ZK circuits.
-- **Lace Wallet Integration**: Connect seamlessly with the Lace Wallet browser extension for signing ZK transactions on-chain.
-- **Secure Healthcare Credential Management**: Store and manage witness records locally with instant copy and verification controls.
-- **Privacy-Preserving Verification**: Disclose only boolean verification results and single-use cryptographic nullifier hashes.
-- **Responsive React Frontend**: Monitor platform metrics, system health, and verification logs across desktop, tablet, and mobile devices.
+### 📢 Public Ledger Commitments
+- `total_verifications`: Counter incremented on the public ledger upon every valid proof submission.
+- `last_nullifier`: Disclosed single-use hash generated via `persistentHash([private_patient_secret, pad(32, "VAC_CERT_V1")])` to prevent replay attacks.
 
 ---
 
-## Technology Stack
+## 🦊 Lace Wallet Integration
 
-- **Smart Contract**: Compact (Midnight Protocol), ZKIR, proving keys
-- **Frontend**: React 18, Vite 6, TypeScript 5, Lucide React
-- **Protocol Tools**: Midnight JS SDK, standalone Proof Server, Indexer
-- **Testing & CI**: Vitest, TypeScript compiler, GitHub Actions
+MedVault ZK integrates with the official **Midnight Lace Browser Extension** (`window.midnight.mnLace`):
+
+- **Automatic Detection**: Detects installed Midnight Lace browser extension.
+- **Authentic Permission Flow**: Clicking **Connect Lace Wallet** invokes the native Lace authorization popup.
+- **State & Account Display**: Displays connected wallet address and balance in the header navigation.
+- **Session Persistence**: Persists wallet connection state across page reloads via local session storage.
+- **Graceful Error Handling**: Provides user notifications if the Lace extension is missing or if connection is rejected.
 
 ---
 
-## Architecture
+## 🏛️ Architecture & Data Flow
 
 ```
 +-------------------------------------------------------------------+
-|                        CLIENT WITNESS CONTEXT                     |
+|                    PATIENT / HOLDER (CLIENT)                      |
 |                                                                   |
-|  Private Witness Data (Off-Chain Only):                           |
-|  - Patient secret key / salt                                      |
-|  - Dose count & vaccine code                                      |
-|  - Certificate expiration date                                    |
+|  Private Witness Data (Off-Chain):                                |
+|  - Patient Secret (Bytes<32>)                                     |
+|  - Dose Count & Expiration Year                                   |
 +---------------------------------+---------------------------------+
                                   |
+                                  | Local Circuit Evaluation
                                   v
 +-------------------------------------------------------------------+
 |                     COMPACT ZK CIRCUIT PROVER                     |
@@ -128,7 +101,7 @@ MedVault ZK addresses these challenges using Midnight's confidential execution m
 
 ---
 
-## Privacy Model
+## 🛡️ Privacy Model
 
 MedVault ZK operates on a strict privacy-first architecture:
 
@@ -138,77 +111,43 @@ MedVault ZK operates on a strict privacy-first architecture:
 
 ---
 
-## Smart Contract Overview
-
-The smart contract (`contracts/vaccination-certificate.compact`) manages public state and verification logic:
-
-- **Public Ledger State**: Tracks the authorized health authority key hash, total verifications counter, and the latest disclosed nullifier hash.
-- **Circuits**:
-  - `setAuthority`: Administrative circuit to update the authorized authority hash.
-  - `verifyCertificate`: Core circuit evaluating dose count, expiration date, and vaccine code assertions, returning a disclosed nullifier hash.
-
----
-
-## Frontend Overview
-
-The web application consists of focused components:
-
-- **Header**: Navigation bar with tab switching, network status badge, and wallet connectivity.
-- **DashboardOverview**: Main landing view displaying platform statistics, system health, and quick actions.
-- **IssueCertificateForm**: Form for healthcare providers to register private certificate records.
-- **VerificationForm**: Verification interface featuring a step-by-step ZK proof progress indicator.
-- **LedgerStateCard**: Interface for inspecting on-chain contract state and disclosed nullifier logs.
-- **PrivacyExplainer**: Educational section detailing the privacy model and Compact `disclose()` logic.
-- **Toast**: Interactive notification alerts for user actions and system status updates.
-
----
-
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 private-vaccination-certificate/
-├── .github/
-│   └── workflows/
-│       └── ci.yml                 # GitHub Actions CI/CD pipeline
+├── .github/workflows/ci.yml         # GitHub Actions CI/CD pipeline
 ├── contracts/
-│   ├── vaccination-certificate.compact  # Compact smart contract
-│   └── managed/                   # Generated ZK circuits & proving keys
-├── docs/
-│   └── images/
-│       ├── landing_page.png       # Dashboard screenshot
-│       └── certification_page.png # Certification issuance screenshot
-├── scripts/
-│   └── e2e-check.ts               # End-to-end smoke test
+│   ├── vaccination-certificate.compact # Compact smart contract
+│   └── managed/                     # Generated ZK circuits & proving keys
+├── docs/images/                     # Platform screenshots
+├── scripts/e2e-check.ts              # End-to-end smoke test
 ├── src/
-│   ├── components/
-│   │   ├── DashboardOverview.tsx  # Main dashboard component
-│   │   ├── Header.tsx             # Header and navigation
-│   │   ├── IssueCertificateForm.tsx # Certificate issuance component
-│   │   ├── LedgerStateCard.tsx    # On-chain state vault
-│   │   ├── PrivacyExplainer.tsx   # Privacy documentation view
-│   │   ├── Toast.tsx              # Notification system
-│   │   └── VerificationForm.tsx   # ZK proof verifier
-│   ├── services/
-│   │   └── midnight.ts            # Midnight integration service
-│   ├── App.tsx                    # Core application layout
-│   ├── index.css                  # Design system styles
-│   ├── main.tsx                   # React entry point
-│   └── vite-env.d.ts              # TypeScript environment declarations
-├── tests/
-│   ├── contract.test.ts           # Contract logic unit tests
-│   └── privacy.test.ts            # Privacy & nullifier unit tests
-├── .env.example                   # Environment variable template
-├── .gitignore                     # Git exclusion rules
-├── LICENSE                        # MIT License
-├── docker-compose.yml             # Local proof server & indexer services
-├── package.json                   # Project dependencies and scripts
-├── tsconfig.json                  # TypeScript configuration
-└── vite.config.ts                 # Vite bundler configuration
+│   ├── components/                  # React UI components
+│   │   ├── DashboardOverview.tsx    # Landing overview component
+│   │   ├── Header.tsx               # Header and navigation
+│   │   ├── IssueCertificateForm.tsx # Certificate issuance form
+│   │   ├── LedgerStateCard.tsx      # On-chain state vault
+│   │   ├── PrivacyExplainer.tsx     # Privacy documentation view
+│   │   ├── Toast.tsx                # Notification system
+│   │   └── VerificationForm.tsx     # ZK proof verifier
+│   ├── services/midnight.ts         # Midnight integration service & Lace wallet
+│   ├── App.tsx                      # Root application layout
+│   ├── index.css                    # Design system styles
+│   └── vite-env.d.ts                # TypeScript environment declarations
+├── tests/                           # Vitest unit test suites
+│   ├── contract.test.ts             # Contract logic unit tests
+│   └── privacy.test.ts              # Privacy & nullifier unit tests
+├── .env.example                     # Environment variable template
+├── docker-compose.yml               # Local proof server & indexer services
+├── package.json                     # Project dependencies and scripts
+├── PROPOSAL.md                      # Architecture proposal document
+├── README.md                        # Documentation
+└── vite.config.ts                   # Vite bundler configuration
 ```
 
 ---
 
-## Installation
+## 🚀 Installation & Local Setup
 
 ### Prerequisites
 - **Node.js**: v22.0.0 or higher
@@ -216,85 +155,56 @@ private-vaccination-certificate/
 - **Compact Compiler**: v0.31.1
 - **Docker & Docker Compose** (for local proof server and indexer)
 
+### Installation
 ```bash
 git clone https://github.com/shouvikkk/private-vaccination-certificate.git
 cd private-vaccination-certificate
 npm install
 ```
 
----
+### Running Locally
 
-## Running Locally
+1. **Start Docker Proof Server & Indexer**:
+   ```bash
+   docker compose up -d
+   ```
 
-### Compiling Smart Contracts
-```bash
-npm run compile
-```
+2. **Compile Smart Contracts**:
+   ```bash
+   npm run compile
+   ```
 
-### Starting Local Environment & Server
-```bash
-# Start local proof server and indexer containers
-docker compose up -d
-
-# Deploy contract to local development network
-npm run setup -- --network undeployed
-
-# Start development web server
-npm run dev
-```
-Open `http://localhost:3000` in your web browser.
-
-### Building for Production
-```bash
-npm run build
-```
+3. **Start Development Web Server**:
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3001` in your browser.
 
 ---
 
-## Testing
+## 🧪 Testing
 
-Execute unit and integration test suites:
+Execute automated unit and integration tests:
 ```bash
 npm test
 ```
 
 ---
 
-## CI/CD
+## 🔄 CI/CD Pipeline
 
-Continuous integration is configured via `.github/workflows/ci.yml`. On every push or pull request to `main`, the automated pipeline:
+Continuous integration is configured via `.github/workflows/ci.yml`. On every push or pull request to `main`, the automated workflow:
 
 1. Checks out repository code.
-2. Sets up Node.js 22.x environment.
-3. Installs the Compact compiler toolchain.
-4. Installs project dependencies (`npm ci`).
+2. Configures Node.js 22.x environment.
+3. Installs Compact compiler toolchain.
+4. Installs Node dependencies (`npm ci`).
 5. Compiles Compact smart contract circuits (`npm run compile`).
-6. Executes automated unit tests (`npm test`).
-7. Validates TypeScript types and builds the production bundle (`npm run build`).
+6. Runs Vitest unit test suite (`npm test`).
+7. Builds production web bundle (`npm run build`).
 
 ---
 
-## Security & Privacy
-
-MedVault ZK is built with privacy-first architecture principles:
-
-- **Confidential Patient Data**: Personal medical attributes remain within the patient's local environment and are never transmitted to public servers or blockchains.
-- **Midnight Confidential Execution**: ZK circuit assertions evaluate rules on-device, generating cryptographic proofs without disclosing underlying inputs.
-- **Data Minimization**: Verifiers receive only boolean confirmation of eligibility alongside a cryptographic nullifier hash.
-- **Clean Repository Practices**: All local environment secrets, deployment states, and temporary build outputs are excluded from version control.
-
----
-
-## Future Enhancements
-
-- **QR Code Verification**: Generate and scan offline QR codes containing zero-knowledge proof payloads.
-- **Certificate Revocation**: Implement on-chain cryptographic accumulators to support credential revocation.
-- **Mobile Wallet Compatibility**: Support native mobile wallet extensions and biometric witness storage.
-- **National Healthcare Integration**: Connect with international healthcare registry APIs and standards.
-- **Multi-Language Support**: Localize the user interface for global healthcare deployments.
-
----
-
-## License
+## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.

@@ -8,13 +8,15 @@ import { PrivacyExplainer } from './components/PrivacyExplainer';
 import { ToastContainer, ToastMessage } from './components/Toast';
 import { MidnightService, WalletState, ContractLedgerState } from './services/midnight';
 
+const INITIAL_NETWORK = (import.meta.env.VITE_NETWORK || "PREPROD").toUpperCase();
+
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('overview');
   const [wallet, setWallet] = useState<WalletState>({
     isConnected: false,
     address: null,
     balance: '0 tNIGHT',
-    network: 'UNDEPLOYED',
+    network: INITIAL_NETWORK,
   });
 
   const [ledgerState, setLedgerState] = useState<ContractLedgerState | null>(null);
@@ -56,12 +58,25 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     loadLedgerState();
+    
+    // Auto-connect if wallet session is saved
+    midnight.autoConnectIfSessionActive().then((savedState) => {
+      if (savedState) {
+        setWallet(savedState);
+      }
+    }).catch(() => {
+      // Ignore auto-connect failures silently
+    });
   }, []);
 
   const handleConnectWallet = async () => {
-    const state = await midnight.connectLaceWallet();
-    setWallet(state);
-    addToast('Lace Wallet Connected', `Connected account ${state.address?.substring(0, 14)}...`);
+    try {
+      const state = await midnight.connectLaceWallet();
+      setWallet(state);
+      addToast('Lace Wallet Connected', `Connected account ${state.address?.substring(0, 14)}...`);
+    } catch (err: any) {
+      addToast('Wallet Connection Error', err?.message || 'Failed to connect Lace Wallet.', 'error');
+    }
   };
 
   const handleDisconnectWallet = () => {
